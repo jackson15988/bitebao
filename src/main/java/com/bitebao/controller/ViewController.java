@@ -49,7 +49,7 @@ public class ViewController implements ErrorController {
         return "videoPlay";
     }
 
-
+    //錯誤頁面導向一率 404頁面
     @GetMapping(path = "/error")
     public String error_page() {
         return "/404";

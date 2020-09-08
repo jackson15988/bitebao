@@ -2,7 +2,6 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="layout/default">
 
-
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -70,6 +69,8 @@
         <a href="#"><strong>Recover Password</strong></a> | <a href="#"><strong>Register Account</strong></a>
     </div>
 </div>
+
+<!--系統訊息顯示區域-->
 <div class="login-footer p-2">
     <div class="row">
         <div class="col col-sm-12 text-center">
@@ -78,15 +79,19 @@
         </div>
     </div>
 </div>
+<!--系統訊息顯示區域-->
 
+
+<!--首頁影片顯示區域-->
 <video th:poster="@{/static/img/backgrounds/clouds.png}" id="bgvid" playsinline autoplay muted loop>
     <source th:src="@{/static/media/video/cc.webm}" type="video/webm">
     <source th:src="@{/static/media/video/cc.mp4}" type="video/mp4">
 </video>
+<!--首頁影片顯示區域-->
+
 
 <script th:src="@{/static/js/vendors.bundle.js}"></script>
 <script th:src="@{/static/js/app.bundle.js}"></script>
-
 </body>
 
 </html>
