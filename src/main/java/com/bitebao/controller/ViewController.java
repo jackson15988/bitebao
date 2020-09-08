@@ -10,12 +10,12 @@ public class ViewController implements ErrorController {
 
     @GetMapping(path = {"/"})
     public String index() {
-        return "index";
+        return "login";
     }
 
-    @GetMapping(path = "/search")
+    @GetMapping(path = "/home")
     public String search() {
-        return "search";
+        return "home";
     }
 
 
