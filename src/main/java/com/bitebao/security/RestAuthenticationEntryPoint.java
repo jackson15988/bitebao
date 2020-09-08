@@ -1,4 +1,4 @@
-package com.bitebao.controller.security;
+package com.bitebao.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.AuthenticationException;
