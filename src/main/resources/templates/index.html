@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="layout/default">
+<head>
+    <title>登入-验证码登入</title>
+
+</head>
+<body>
+
+<div class="main-wrap-bg" layout:fragment="content">
+    <div class="w w-login">
+
+        <div class="form-info-wp">
+            <p class="text-center">使用验证码登入</p>
+        </div>
+
+        <div class="form-input-wp">
+            <ul>
+                <li>
+                    <label>手机号</label><input name="phone-num" placeholder="请填写手机号" maxlength="" type="number" value="">
+                </li>
+                <li>
+                    <label>验证码</label><input class="otp" name="otp" placeholder="请填写验证码" maxlength="" type="number"
+                                             value="">
+                    <a href="javascript:;" class="btn btn-otp">获取验证码</a>
+                </li>
+            </ul>
+            <div class="footer-icon">
+                <a class="btn btn-submit" href="javascript:;">登入</a>
+                <a class="psw-sign-in" href="login_psw.html">使用密码登入</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
