@@ -13,16 +13,18 @@ public class ViewController implements ErrorController {
         return "login";
     }
 
+    //首頁
     @GetMapping(path = "/home")
     public String search() {
         return "home";
     }
 
-
-    @GetMapping(path = "/loginPsw")
+    //系統設定配置頁面
+    @GetMapping(path = "/systemConfig")
     public String loginPsw() {
-        return "loginPsw";
+        return "systemConfig";
     }
+
 
     @GetMapping(path = "/loginOtp")
     public String loginOtp() {
