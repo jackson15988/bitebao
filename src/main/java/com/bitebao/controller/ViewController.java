@@ -25,16 +25,18 @@ public class ViewController implements ErrorController {
         return "systemConfig";
     }
 
-
-    @GetMapping(path = "/loginOtp")
-    public String loginOtp() {
-        return "index";
+    //會員設置
+    @GetMapping(path = "/memberProfile")
+    public String memberProfile() {
+        return "memberProfile";
     }
 
-    @GetMapping(path = "/loginForgetPsw")
-    public String loginForgetPsw() {
-        return "loginGetPsw";
+    //即時報酬分析
+    @GetMapping(path = "/dashboard")
+    public String dashboard() {
+        return "dashboard";
     }
+
 
     @GetMapping(path = "/register")
     public String register() {

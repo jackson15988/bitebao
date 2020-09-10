@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "bt_user")
+@Table(name = "BT_USER")
 public class BtUser extends BaseEntity {
 
     @Column(name = "ACCOUNT")
@@ -24,4 +24,7 @@ public class BtUser extends BaseEntity {
     @Column(name = "NIKE_NAME")
     private String nikeName;
 
+
+    @Column(name = "PASSWORD")
+    private String password;
 }

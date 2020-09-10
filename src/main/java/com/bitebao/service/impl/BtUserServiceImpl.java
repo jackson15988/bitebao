@@ -20,4 +20,5 @@ public class BtUserServiceImpl implements BtUserService {
     public BtUser findByAccount(String account) {
         return btUserRepository.findByAccount(account);
     }
+
 }

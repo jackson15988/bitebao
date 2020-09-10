@@ -1,12 +1,14 @@
 package com.bitebao.controller;
 
 import com.bitebao.dto.SuccessResponseDto;
-import com.bitebao.dto.UserLoginPswDto;
 import com.bitebao.entity.BtUser;
 import com.bitebao.service.BtUserService;
+import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 
 @RestController
@@ -22,9 +24,19 @@ public class UserController {
 
     //驗證登入API
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public ResponseEntity<SuccessResponseDto> login(UserLoginPswDto user) {
+    public ResponseEntity<SuccessResponseDto> login(BtUser user) {
         System.out.println("POJO: " + user.getAccount());
-        return ResponseUtil.successOutputResult(null);
+        boolean successfully = false;
+        BtUser userObj = btUserService.findByAccount(user.getAccount());
+        if (userObj != null) {
+            String md5Str = MD5Utils.encode(user.getPassword());
+            if (Objects.equals(md5Str, userObj.getPassword())) {
+                successfully = true;
+            } else {
+
+            }
+        }
+        return ResponseUtil.successOutputResult(true, "success");
     }
 
     //找尋使用者資訊

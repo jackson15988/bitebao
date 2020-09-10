@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseUtil {
 
+
     public static ResponseEntity<ErrorResponseDto> errorOutputResult(GeneralException exception, HttpStatus httpStatus) {
         ExceptionEnum exceptionEnum = exception.getExceptionEnum();
         String code = exceptionEnum.getCode();
