@@ -1,13 +1,17 @@
 package com.bitebao.controller;
 
+import com.bitebao.bo.UserBo;
 import com.bitebao.dto.SuccessResponseDto;
 import com.bitebao.entity.BtUser;
 import com.bitebao.service.BtUserService;
+import com.bitebao.utils.HostAddressUtils;
 import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 
@@ -24,19 +28,18 @@ public class UserController {
 
     //驗證登入API
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public ResponseEntity<SuccessResponseDto> login(BtUser user) {
+    public String login(BtUser user, SessionStatus sessionStatus, HttpServletRequest request) {
         System.out.println("POJO: " + user.getAccount());
         boolean successfully = false;
+        String loginIp = HostAddressUtils.getRealIPAddresses(request);
         BtUser userObj = btUserService.findByAccount(user.getAccount());
         if (userObj != null) {
             String md5Str = MD5Utils.encode(user.getPassword());
             if (Objects.equals(md5Str, userObj.getPassword())) {
-                successfully = true;
-            } else {
-
+                return "redirect:/home";
             }
         }
-        return ResponseUtil.successOutputResult(true, "success");
+        return "login";
     }
 
     //找尋使用者資訊
@@ -47,6 +50,21 @@ public class UserController {
         BtUser BtUser = btUserService.findByAccount(account);
         return ResponseUtil.successOutputResult(BtUser, "success");
     }
+
+
+    @GetMapping("/doLogout")
+    public String doLogout(HttpServletRequest request) {
+        String result = UserBo.doLogOut(request);
+        if ("success".equals(result)) {
+            return "redirect:/";
+        } else {
+            return "rediret:/error";
+        }
+    }
+
+    /*
+
+     */
 
    /* @GetMapping(path = "/updateExposureById")
     public ResponseEntity<SuccessResponseDto> updateExposureById(
