@@ -36,6 +36,7 @@ public class UserController {
         if (userObj != null) {
             String md5Str = MD5Utils.encode(user.getPassword());
             if (Objects.equals(md5Str, userObj.getPassword())) {
+
                 return "redirect:/home";
             }
         }
