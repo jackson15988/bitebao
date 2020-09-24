@@ -97,6 +97,13 @@
                     <span class="nav-link-text" data-i18n="nav.form_stuff">會員資訊</span>
                 </a>
                 <ul>
+                    <li th:if="${session.userSession.isAdmin} eq 'Y'">
+                        <a href="memberMgmt" title="會員管理"
+                           data-filter-tags="會員CRUD">
+                                    <span class="nav-link-text"
+                                          data-i18n="nav.theme_settings_how_it_works">會員管理</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="memberProfile" title="會員設置"
                            data-filter-tags="tables generate table style">
