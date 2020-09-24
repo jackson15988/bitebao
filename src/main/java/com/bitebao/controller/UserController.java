@@ -7,7 +7,11 @@ import com.bitebao.service.BtUserService;
 import com.bitebao.utils.HostAddressUtils;
 import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -18,6 +22,8 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/admin/user")
 public class UserController {
+
+    Logger log = LoggerFactory.getLogger(getClass());
 
     private BtUserService btUserService;
 
@@ -32,6 +38,7 @@ public class UserController {
         System.out.println("POJO: " + user.getAccount());
         boolean successfully = false;
         String loginIp = HostAddressUtils.getRealIPAddresses(request);
+        log.info("取得登入IP位置:" + loginIp);
         BtUser userObj = btUserService.findByAccount(user.getAccount());
         if (userObj != null) {
             String md5Str = MD5Utils.encode(user.getPassword());
@@ -60,6 +67,12 @@ public class UserController {
         } else {
             return "rediret:/error";
         }
+    }
+
+    @PostMapping("/editMember")
+    public String editMember(BtUser user, BindingResult result, Model model) {
+        System.out.print("取得user資訊:" + user);
+        return "register";
     }
 
     /*
