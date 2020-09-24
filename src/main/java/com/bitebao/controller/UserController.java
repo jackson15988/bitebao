@@ -5,10 +5,10 @@ import com.bitebao.dto.SuccessResponseDto;
 import com.bitebao.entity.BtUser;
 import com.bitebao.service.BtUserService;
 import com.bitebao.utils.HostAddressUtils;
+import com.bitebao.utils.LogUtils;
 import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping("/admin/user")
 public class UserController {
 
-    Logger log = LoggerFactory.getLogger(getClass());
+    private Logger log = LogUtils.loginLog;
 
     private BtUserService btUserService;
 
@@ -34,18 +35,25 @@ public class UserController {
 
     //驗證登入API
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public String login(BtUser user, SessionStatus sessionStatus, HttpServletRequest request) {
+    public String login(BtUser user, HttpServletRequest request, Model model) {
         System.out.println("POJO: " + user.getAccount());
-        boolean successfully = false;
-        String loginIp = HostAddressUtils.getRealIPAddresses(request);
-        log.info("取得登入IP位置:" + loginIp);
-        BtUser userObj = btUserService.findByAccount(user.getAccount());
-        if (userObj != null) {
-            String md5Str = MD5Utils.encode(user.getPassword());
-            if (Objects.equals(md5Str, userObj.getPassword())) {
-
-                return "redirect:/home";
+        try {
+            String loginIp = HostAddressUtils.getRealIPAddresses(request);
+            log.info("取得登入IP位置:" + loginIp);
+            BtUser userObj = btUserService.findByAccount(user.getAccount());
+            if (userObj != null) {
+                String md5Pssword = MD5Utils.encode(user.getPassword());
+                boolean isPass = UserBo.checkLoginInfo(request, userObj, md5Pssword);
+                if (isPass) {
+                    return "redirect:/#home";
+                }
             }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            Map<String, String> exceptionMap = new HashMap<>();
+            exceptionMap.put("code", "500");
+            exceptionMap.put("msg", e.getMessage());
+            model.addAttribute("exMap", exceptionMap);
         }
         return "login";
     }

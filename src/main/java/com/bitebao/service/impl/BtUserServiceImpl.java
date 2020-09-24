@@ -6,6 +6,8 @@ import com.bitebao.repository.BtUserRepository;
 import com.bitebao.service.BtUserService;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class BtUserServiceImpl implements BtUserService {
 
@@ -20,5 +22,6 @@ public class BtUserServiceImpl implements BtUserService {
     public BtUser findByAccount(String account) {
         return btUserRepository.findByAccount(account);
     }
+
 
 }

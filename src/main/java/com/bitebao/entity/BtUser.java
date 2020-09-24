@@ -35,4 +35,8 @@ public class BtUser extends BaseEntity {
 
     @Column(name = "PASSWORD")
     private String password;
+
+
+    @Column(name = "IS_ADMIN")
+    private String isAdmin;
 }

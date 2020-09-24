@@ -16,7 +16,7 @@ public class LogUtils {
         ex: WebServerSessionManager
     */
 
-    public static Logger myVideoCenterLog = LoggerFactory.getLogger("myVideoCenter");
+    public static Logger loginLog = LoggerFactory.getLogger("loginLog");
 
     public static Logger transLog = LoggerFactory.getLogger("myVideoCenter");
 

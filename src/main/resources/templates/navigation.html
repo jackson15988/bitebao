@@ -45,7 +45,7 @@
                     <span class="nav-link-text" data-i18n="nav.theme_settings">設定</span>
                 </a>
                 <ul>
-                    <li>
+                    <li th:if="${session.userSession.isAdmin} eq 'Y'">
                         <a href="systemConfig" title="系統配置"
                            data-filter-tags="theme settings how it works">
                                     <span class="nav-link-text"

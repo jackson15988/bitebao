@@ -7,36 +7,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController implements ErrorController {
 
-
     @GetMapping(path = {"/"})
-    public String index() {
+    public String login() {
         return "login";
     }
 
-    //首頁
-    @GetMapping(path = "/home")
-    public String search() {
+    @GetMapping(path = {"/home"})
+    public String home() {
         return "home";
     }
 
-    //系統設定配置頁面
-    @GetMapping(path = "/systemConfig")
+    @GetMapping(path = "/search")
+    public String search() {
+        return "search";
+    }
+
+
+    @GetMapping(path = "/loginPsw")
     public String loginPsw() {
-        return "systemConfig";
+        return "loginPsw";
     }
 
-    //會員設置
-    @GetMapping(path = "/memberProfile")
-    public String memberProfile() {
-        return "memberProfile";
+    @GetMapping(path = "/loginOtp")
+    public String loginOtp() {
+        return "loginOtp";
     }
 
-    //即時報酬分析
-    @GetMapping(path = "/dashboard")
-    public String dashboard() {
-        return "dashboard";
+    @GetMapping(path = "/loginForgetPsw")
+    public String loginForgetPsw() {
+        return "loginGetPsw";
     }
-
 
     @GetMapping(path = "/register")
     public String register() {
@@ -53,7 +53,7 @@ public class ViewController implements ErrorController {
         return "videoPlay";
     }
 
-    //錯誤頁面導向一率 404頁面
+
     @GetMapping(path = "/error")
     public String error_page() {
         return "/404";
