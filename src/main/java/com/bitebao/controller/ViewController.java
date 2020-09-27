@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController implements ErrorController {
 
-    @GetMapping(path = {"/"})
+    @GetMapping(path = {"/", "/login"})
     public String login() {
         return "login";
     }
@@ -17,46 +17,19 @@ public class ViewController implements ErrorController {
         return "home";
     }
 
-    @GetMapping(path = "/search")
-    public String search() {
-        return "search";
+    @GetMapping(path = {"/memberProfile"})
+    public String memberProfile() {
+        return "memberProfile";
     }
 
-
-    @GetMapping(path = "/loginPsw")
-    public String loginPsw() {
-        return "loginPsw";
+    @GetMapping(path = {"/memberMgmt"})
+    public String memberMgmt() {
+        return "memberMgmt";
     }
 
-    @GetMapping(path = "/loginOtp")
-    public String loginOtp() {
-        return "loginOtp";
-    }
-
-    @GetMapping(path = "/loginForgetPsw")
-    public String loginForgetPsw() {
-        return "loginGetPsw";
-    }
-
-    @GetMapping(path = "/register")
-    public String register() {
-        return "register";
-    }
-
-    @GetMapping(path = "/more")
-    public String more() {
-        return "more";
-    }
-
-    @GetMapping(path = "/videoPlay")
-    public String video_play() {
-        return "videoPlay";
-    }
-
-
-    @GetMapping(path = "/error")
-    public String error_page() {
-        return "/404";
+    @GetMapping(path = {"/systemConfig"})
+    public String systemConfig() {
+        return "systemConfig";
     }
 
 

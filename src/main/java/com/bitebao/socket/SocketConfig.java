@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class SocketConfig {
 
+public class SocketConfig {
+/*
     @Value("${socketio.port}")
     private Integer port;
 
@@ -61,16 +61,16 @@ public class SocketConfig {
         return new SocketIOServer(config);
     }
 
-    /**
+    *//**
      * 开启SocketIOServer注解支持
      *
      * @param socketServer
      * @return com.corundumstudio.socketio.annotation.SpringAnnotationScanner
      * @author wliduo[i@dolyw.com]
      * @date 2019/7/31 18:21
-     */
+     *//*
     @Bean
     public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketServer) {
         return new SpringAnnotationScanner(socketServer);
-    }
+    }*/
 }

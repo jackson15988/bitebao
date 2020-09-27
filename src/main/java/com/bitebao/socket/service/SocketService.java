@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 public class SocketService {
 
-    private org.slf4j.Logger logger = LogUtils.socketLog;
+  /*  private org.slf4j.Logger logger = LogUtils.socketLog;
 
     private final SocketIOServer socketIOServer;
     private final ObjectMapper objectMapper;
@@ -37,11 +37,11 @@ public class SocketService {
         });
     }
 
-    /**
+    *//**
      * 推播新交易紀錄
      *
      * @author Zora
-     */
+     *//*
     public void sendNewTransactionRecordMessage(Integer userId, String sessionId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.put("userId", userId);
@@ -59,11 +59,11 @@ public class SocketService {
 
     }
 
-    /**
+    *//**
      * 強制剔除下線之功能
      *
      * @author Ryan
-     */
+     *//*
     public void forceKickOut(Integer userId, String sessionId) {
         ObjectNode objectNode = objectMapper.createObjectNode();
         objectNode.put("userId", userId);
@@ -78,5 +78,5 @@ public class SocketService {
         } else {
             targetClient.sendEvent("message", sendMessageDto);
         }
-    }
+    }*/
 }

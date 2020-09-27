@@ -2,6 +2,7 @@ package com.bitebao.bo;
 
 import com.bitebao.entity.BtUser;
 import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
@@ -19,8 +20,6 @@ public class UserBo {
         }
         return isCheckPass;
     }
-
-    ;
 
 
     /**

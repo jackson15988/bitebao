@@ -9,11 +9,12 @@ import com.bitebao.utils.LogUtils;
 import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -26,37 +27,9 @@ public class UserController {
 
     private Logger log = LogUtils.loginLog;
 
-    private BtUserService btUserService;
+    @Autowired
+    BtUserService btUserService;
 
-    public UserController(BtUserService btUserService) {
-        this.btUserService = btUserService;
-    }
-
-
-    //驗證登入API
-    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public String login(BtUser user, HttpServletRequest request, Model model) {
-        System.out.println("POJO: " + user.getAccount());
-        try {
-            String loginIp = HostAddressUtils.getRealIPAddresses(request);
-            log.info("取得登入IP位置:" + loginIp);
-            BtUser userObj = btUserService.findByAccount(user.getAccount());
-            if (userObj != null) {
-                String md5Pssword = MD5Utils.encode(user.getPassword());
-                boolean isPass = UserBo.checkLoginInfo(request, userObj, md5Pssword);
-                if (isPass) {
-                    return "redirect:/#home";
-                }
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            Map<String, String> exceptionMap = new HashMap<>();
-            exceptionMap.put("code", "500");
-            exceptionMap.put("msg", e.getMessage());
-            model.addAttribute("exMap", exceptionMap);
-        }
-        return "login";
-    }
 
     //找尋使用者資訊
     @GetMapping("/findUserInfoByAccount")
@@ -68,20 +41,15 @@ public class UserController {
     }
 
 
-    @GetMapping("/doLogout")
-    public String doLogout(HttpServletRequest request) {
-        String result = UserBo.doLogOut(request);
-        if ("success".equals(result)) {
-            return "redirect:/";
-        } else {
-            return "rediret:/error";
-        }
-    }
-
     @PostMapping("/editMember")
-    public String editMember(BtUser user, BindingResult result, Model model) {
+    public ResponseEntity<SuccessResponseDto> editMember(BtUser user, BindingResult result, Model model, HttpServletRequest request) {
+        try {
+            btUserService.updateUserInfo(request, user);
+        } catch (Exception e) {
+
+        }
         System.out.print("取得user資訊:" + user);
-        return "register";
+        return ResponseUtil.successOutputResult("success");
     }
 
     /*

@@ -20,11 +20,14 @@ import java.util.Map;
 @Component
 public class SocketHandler {
 
+/*
 
     private final SocketService socketService;
 
+*/
 /*    @Autowired
-    UserOnlineService userOnlineService;*/
+    UserOnlineService userOnlineService;*//*
+
 
     //当客户端发起连接时调用
     @OnConnect
@@ -35,7 +38,9 @@ public class SocketHandler {
         List<String> userId = urlParams.get("id");
         String sessionId = client.getSessionId().toString();
         try {
-            /* userOnlineService.updateOnlineUser(Integer.valueOf(userId.get(0)), sessionId);*/
+            */
+/* userOnlineService.updateOnlineUser(Integer.valueOf(userId.get(0)), sessionId);*//*
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,7 +51,9 @@ public class SocketHandler {
     public void onDisConnect(SocketIOClient client) {
         Map<String, List<String>> urlParams = client.getHandshakeData().getUrlParams();
         List<String> userId = urlParams.get("id");
-        /*  userOnlineService.deleteOnlineUserSession(client.getSessionId().toString());*/
+        */
+/*  userOnlineService.deleteOnlineUserSession(client.getSessionId().toString());*//*
+
         log.info("onDisconnect:" + client.getSessionId());
     }
 
@@ -66,5 +73,6 @@ public class SocketHandler {
                 break;
         }
     }
+*/
 
 }
