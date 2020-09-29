@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="layout/default">
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Borders - 會員設置 - SmartAdmin v4.5.1
+    </title>
+    <meta name="description" content="Borders">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- 公共 base css -->
+    <link id="vendorsbundle" rel="stylesheet" media="screen, print" th:href="@{/static/css/vendors.bundle.css}">
+    <link id="appbundle" rel="stylesheet" media="screen, print" th:href="@{/static/css/app.bundle.css}">
+    <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
+    <link id="myskin" rel="stylesheet" media="screen, print" th:href="@{/static/css/skins/skin-master.css}">
+    <!--  公共的 icon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/static/img/favicon/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/static/img/favicon/favicon-32x32.png}">
+    <link rel="mask-icon" th:href="@{/static/img/favicon/safari-pinned-tab.svg}" color="#5bbad5">
+
+    <!--JqGrid-->
+    <script th:src="@{/plugin/jqgrid/grid.locale-cn.js}"></script>
+    <script th:src="@{/plugin/jqgrid/jquery.jqGrid.min.js}"></script>
+    <script th:src="@{/plugin/jqgrid/grid.locale-en.min.js}"></script>
+
+
+</head>
+
+<body class="mod-bg-1 mod-nav-link ">
+
+<div class="page-wrapper">
+    <div class="page-inner">
+
+        <aside id="left-panel" th:replace="navigation :: asideSelf"></aside>
+        <div class="page-content-wrapper">
+            <!-- BEGIN Page Header -->
+            <header class="page-header" role="banner" th:replace="banner :: bannerhtml"></header>
+            <!-- END Page Header -->
+
+            <!-- BEGIN Page Content -->
+            <!-- the #js-page-content id is needed for some plugins to initialize -->
+            <main id="js-page-content" role="main" class="page-content">
+                <ol class="breadcrumb page-breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">比特寶</a></li>
+                    <li class="breadcrumb-item">會員資訊</li>
+                    <li class="breadcrumb-item active">會員設置</li>
+                    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span>
+                    </li>
+                </ol>
+
+                <!--      底下業務模組區域開始          -->
+
+                <div id="container" class="row">
+                    <div class="row queryTop">
+                        <form id="form">
+                            <article class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">账号</span> <input type="text" class="form-control"
+                                                                                     id="queryInput">
+                                </div>
+                            </article>
+                            <article class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">账号状态</span>
+                                    <select class="form-control" id="statusSelect" name="statusSelect">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </article>
+                        </form>
+                        <article class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <button class="btn btn-primary" id="queryForm">查询</button>
+                            <button class="btn btn-danger" id="clearForm">清除</button>
+                        </article>
+                    </div>
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table id="jqgrid" class="jqgrid-tr-bg"></table>
+                        <div id="pjqgrid"></div>
+                    </article>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/js/vendors.bundle.js}"></script>
+<script th:src="@{/static/js/app.bundle.js}"></script>
+<script th:src="@{/static/js/html/userSetting/userSetting.js}"></script>
+<script th:src="@{/static/js/html/userSetting/main.js}"></script>
+</body>
+<!-- END Body -->
+</html>
