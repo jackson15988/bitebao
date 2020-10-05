@@ -33,14 +33,6 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-
-        <!--spring security 安全性驗證-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!--spring security 安全性驗證-->
-
         <!--日誌框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

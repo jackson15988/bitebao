@@ -19,7 +19,6 @@ var member = (function () {
 
     };
 
-
     //需要開放成public的function寫在這，key是對外的名稱
     return {
         init: init

@@ -1,0 +1,3 @@
+$(function () {
+    systemTransLogSetting.init($("#container"))
+});

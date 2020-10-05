@@ -27,7 +27,7 @@ var userSetting = (function () {
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
                 '   <div class="input-group" id="name">' +
                 '       <span class="input-group-addon">昵称</span>' +
-                '       <input class="form-control" name="name" >' +
+                '       <input class="form-control" name="name">' +
                 '   </div></section></div>' +
                 '<div class="row">' +
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
@@ -55,7 +55,7 @@ var userSetting = (function () {
                 '   <div class="input-group" id="isUseGoogleAuth">' +
                 '       <span class="input-group-addon">是否启用谷歌验证码</span>' +
                 '<input class="form-check-input" type="radio" name="isUseGoogleAuth" id="addIsUseGoogleAuth1" value="Y">' +
-                '       <label class="form-check-label" for="addIsUseGoogleAuth1" >启用</label>' +
+                '       <label class="form-check-label" for="addIsUseGoogleAuth1">启用</label>' +
                 '<input class="form-check-input" type="radio" name="isUseGoogleAuth" value="N"  id="addIsUseGoogleAuth2">' +
                 '<label class="form-check-label" for="addIsUseGoogleAuth2">停用</label>' +
                 '   </div></section></div>' +
@@ -84,7 +84,7 @@ var userSetting = (function () {
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
                 '   <div class="input-group" id="userName">' +
                 '       <span class="input-group-addon">账号</span>' +
-                '       <input placeholder="" class="form-control" name="userName" readonly  >' +
+                '       <input placeholder="" class="form-control" name="userName" readonly>' +
                 '   </div></section></div>' +
                 '<div class="row">' +
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
@@ -96,7 +96,7 @@ var userSetting = (function () {
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
                 '   <div class="input-group" id="name">' +
                 '       <span class="input-group-addon">昵称</span>' +
-                '       <input class="form-control" name="name" placeholder="最多10字符，包含文字、字母和数字">' +
+                '       <input class="form-control" name="name">' +
                 '   </div></section></div>' +
                 '<div class="row">' +
                 '<section class="col-xs-12 col-sm-12 col-md-12 col-lg-10">' +
@@ -242,15 +242,15 @@ var userSetting = (function () {
                 email: jqueryMap.$editContent.find("input[name='email']").val(),
                 enable: jqueryMap.$editContent.find("input[name='enable']:checked").val(),
                 isUseGoogleAuth: jqueryMap.$editContent.find("input[name='isUseGoogleAuth']:checked").val(),
-                googleSecretKey: jqueryMap.$editContent.find("input[name='googleSecretKey']").val(),
-                roleIdList: [],
+                googleSecretKey: jqueryMap.$editContent.find("input[name='googleSecretKey']").val()
             };
 
         var roleIdList = [];
         var roleCheckBoxList = jqueryMap.$editContent.find("input:checked[name='roleIdList']");
-        roleCheckBoxList.each((i) => roleIdList.push(roleCheckBoxList[i].value));
+        $.each(roleCheckBoxList, function (i) { //取得被选取checkBox的值
+            roleIdList.push(roleCheckBoxList[i].value);
+        });
         postData['roleIdList'] = roleIdList;
-        console.log('出去');
 
         $.patch(configMap.editApi, postData).then(function (response) {
             if (response.code === "0") {
@@ -323,7 +323,7 @@ var userSetting = (function () {
         jqueryMap.$addContent.find("input[name='phoneNum']").val("");
         jqueryMap.$addContent.find("input[name='googleSecretKey']").val("");
         jqueryMap.$addContent.find("input[name='enable'][value='1']").prop("checked", true);
-        jqueryMap.$addContent.find("input[name='isUseGoogleAuth'][value='N']").prop("checked", true);
+        jqueryMap.$addContent.find("input[name='isUseGoogleAuth'][value='Y']").prop("checked", true);
 
         var $roleGroup = jqueryMap.$addContent.find(".inline-group");
         $roleGroup.html("");
@@ -500,11 +500,6 @@ var userSetting = (function () {
         mv.jqgrid(stateMap.jqGridOption);
     };
 
-    stopMoving = function () {
-        alert('');
-    };
-
-
     initStatusList = function () {
         var data = {userName: ""};
         $.get(configMap.getStatusListAPi, data).then(function (response) {
@@ -520,24 +515,35 @@ var userSetting = (function () {
     };
 
     init = function () {
-        alert('家仔');
+        initStatusList();
+        initJqGrid();
+        addQueryTopEvent();
+        stateMap.addDialog = new dialog({
+            title: configMap.addDialogTitle,
+            width: 600,
+            height: 650
+        }, {
+            content: jqueryMap.$addContent, submitHandler: onAddSubmitClick
+        });
+        stateMap.editDialog = new dialog({
+            title: configMap.editDialogTitle,
+            width: 600,
+            height: 650
+        }, {
+            content: jqueryMap.$editContent, submitHandler: onEditSubmitClick
+        });
+        stateMap.deleteDialog = new dialog({
+            title: configMap.deleteDialogTitle
+        }, {
+            content: jqueryMap.$deleteContent, submitHandler: onDeleteSubmitClick
+        });
+        stateMap.qrCodeDialog = new dialog({
+            title: configMap.qrCodeDialogTitle,
+            width: 300
+        }, {
+            content: jqueryMap.$qrCodeContent, submitHandler: onShowGoogleQRCodeClick
+        });
     };
-
-
-    jqueryMap.$editContent.find("[name='isUseGoogleAuth']").change(function () {
-        let checked = jqueryMap.$editContent.find("input[name='isUseGoogleAuth']:checked").val();
-        let googleKey = jqueryMap.$editContent.find("[name='googleSecretKey']").val();
-        if (checked === "Y" && googleKey === "") {
-            jqueryMap.$editContent.find("#editGetGoogleSecretKey").click();
-        }
-    })
-    jqueryMap.$addContent.find("[name='isUseGoogleAuth']").change(function () {
-        let checked = jqueryMap.$addContent.find("input[name='isUseGoogleAuth']:checked").val();
-        let googleKey = jqueryMap.$addContent.find("[name='googleSecretKey']").val();
-        if (checked === "Y" && googleKey === "") {
-            jqueryMap.$addContent.find("#addGetGoogleSecretKey").click();
-        }
-    })
 
     getAllRoleList = function () {
         return $.get(configMap.getRoleListAPi, {userName: ""});

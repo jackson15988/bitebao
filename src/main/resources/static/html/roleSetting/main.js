@@ -1,0 +1,3 @@
+$(function () {
+    roleSetting.init($("#container"))
+});

@@ -1,0 +1,3 @@
+$(function () {
+    systemLogSetting.init($("#container"))
+});

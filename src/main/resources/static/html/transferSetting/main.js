@@ -1,0 +1,3 @@
+$(function () {
+    transferSetting.init($("#transferSettingContainer"))
+});

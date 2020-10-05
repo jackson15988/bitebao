@@ -15,6 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <!-- Remove Tap Highlight on Windows Phone IE -->
     <meta name="msapplication-tap-highlight" content="no">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!-- 公共 base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" th:href="@{/static/css/vendors.bundle.css}">
     <link id="appbundle" rel="stylesheet" media="screen, print" th:href="@{/static/css/app.bundle.css}">
@@ -25,12 +26,14 @@
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/static/img/favicon/favicon-32x32.png}">
     <link rel="mask-icon" th:href="@{/static/img/favicon/safari-pinned-tab.svg}" color="#5bbad5">
 
+    <!--Jquery插件-->
+    <script th:src="@{/static/plugin/jquery/jquery-2.1.1.min.js}"></script>
+    <script th:src="@{/static/plugin/jquery/jquery-ui-1.10.3.min.js}"></script>
+
     <!--JqGrid-->
-    <script th:src="@{/plugin/jqgrid/grid.locale-cn.js}"></script>
-    <script th:src="@{/plugin/jqgrid/jquery.jqGrid.min.js}"></script>
-    <script th:src="@{/plugin/jqgrid/grid.locale-en.min.js}"></script>
-
-
+    <script th:src="@{/static/plugin/jqgrid/grid.locale-cn.js}"></script>
+    <script th:src="@{/static/plugin/jqgrid/jquery.jqGrid.min.js}"></script>
+    <script th:src="@{/static/plugin/jqgrid/grid.locale-en.min.js}"></script>
 </head>
 
 <body class="mod-bg-1 mod-nav-link ">
@@ -58,32 +61,10 @@
                 <!--      底下業務模組區域開始          -->
 
                 <div id="container" class="row">
-                    <div class="row queryTop">
-                        <form id="form">
-                            <article class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <div class="input-group">
-                                    <span class="input-group-addon">账号</span> <input type="text" class="form-control"
-                                                                                     id="queryInput">
-                                </div>
-                            </article>
-                            <article class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">账号状态</span>
-                                    <select class="form-control" id="statusSelect" name="statusSelect">
-                                        <option value="">全部</option>
-                                    </select>
-                                </div>
-                            </article>
-                        </form>
-                        <article class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <button class="btn btn-primary" id="queryForm">查询</button>
-                            <button class="btn btn-danger" id="clearForm">清除</button>
-                        </article>
+                    <div style="margin-left:20px">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
                     </div>
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <table id="jqgrid" class="jqgrid-tr-bg"></table>
-                        <div id="pjqgrid"></div>
-                    </article>
                 </div>
 
             </main>
@@ -93,8 +74,31 @@
 
 <script th:src="@{/static/js/vendors.bundle.js}"></script>
 <script th:src="@{/static/js/app.bundle.js}"></script>
-<script th:src="@{/static/js/html/userSetting/userSetting.js}"></script>
-<script th:src="@{/static/js/html/userSetting/main.js}"></script>
 </body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#jqGrid").jqGrid({
+            url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/getjsonp.php?callback=?&qwery=longorders',
+            mtype: "GET",
+            styleUI: 'Bootstrap',
+            datatype: "jsonp",
+            colModel: [
+                {label: 'OrderID', name: 'OrderID', key: true, width: 75},
+                {label: 'Customer ID', name: 'CustomerID', width: 150},
+                {label: 'Order Date', name: 'OrderDate', width: 150},
+                {label: 'Freight', name: 'Freight', width: 150},
+                {label: 'Ship Name', name: 'ShipName', width: 150}
+            ],
+            viewrecords: true,
+            height: 250,
+            rowNum: 20,
+            pager: "#jqGridPager"
+        });
+    });
+
+</script>
+
 <!-- END Body -->
 </html>
