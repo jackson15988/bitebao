@@ -116,6 +116,12 @@ var indexJs = (function () {
         stateMap.userInfo = window.user;
 
         $("#doLogOut").text(window.user.account);
+        $(".info-card-text").find("#nikeName").text(window.user.nikeName);
+        $(".info-card-text").find("#memberEmail").text(window.user.email);
+
+        //左边横幅栏位初始化
+        $(".info-card").find("#nikeName").text(window.user.nikeName);
+
     };
     return {
         init: init,

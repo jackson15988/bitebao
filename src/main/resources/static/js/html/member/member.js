@@ -16,8 +16,9 @@ var member = (function () {
         };
         $.get("/bitebao/admin/user/findUserInfoByAccount", memberData, function (response) {
             let memberInfo = response.result;
-            $("#account").val(memberInfo.account);
-
+            $("#memberProfileForm").find("#account").val(memberInfo.account);
+            $("#memberProfileForm").find('#nikeName').val(memberInfo.nikeName);
+            $("#memberProfileForm").find('#email').val(memberInfo.email);
             console.log('回傳資訊' + memberInfo);
         });
 

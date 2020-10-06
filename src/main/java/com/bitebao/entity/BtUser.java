@@ -32,11 +32,13 @@ public class BtUser extends BaseEntity {
     @Column(name = "ACTIVATION_STATUS")
     private Integer activationStatus;
 
-
     @Column(name = "PASSWORD")
     private String password;
 
-
     @Column(name = "IS_ADMIN")
     private String isAdmin;
+
+    @Column(name = "EMAIL")
+    private String email;
+
 }
