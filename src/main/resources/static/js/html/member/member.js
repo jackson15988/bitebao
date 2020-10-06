@@ -17,6 +17,7 @@ var member = (function () {
         $.get("/bitebao/admin/user/findUserInfoByAccount", memberData, function (response) {
             let memberInfo = response.result;
             $("#account").val(memberInfo.account);
+
             console.log('回傳資訊' + memberInfo);
         });
 

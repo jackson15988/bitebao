@@ -14,37 +14,37 @@ var indexJs = (function () {
         userInfo: null
     }, init, initWsConnection, connectHandler, disconnectHandler, messageHandler;
 
- /*   initWsConnection = function () {
-        console.log('初始化执行');
-        let socketObj = {
-            transport: ['websocket'],
-            query: stateMap.userInfo,
-            autoConnect: false,
-            reconnection: false,
-            forceNew: true
-        };
-        //连线地址
-        let socketUrl = configMap.socketPath + ":" + configMap.socketPort;
-        stateMap.chatSocket = io.connect(socketUrl, socketObj);
-        stateMap.chatSocket.on('connect', connectHandler);
-        stateMap.chatSocket.on('disconnect', disconnectHandler);
-        stateMap.chatSocket.on('message', messageHandler);
+    /*   initWsConnection = function () {
+           console.log('初始化执行');
+           let socketObj = {
+               transport: ['websocket'],
+               query: stateMap.userInfo,
+               autoConnect: false,
+               reconnection: false,
+               forceNew: true
+           };
+           //连线地址
+           let socketUrl = configMap.socketPath + ":" + configMap.socketPort;
+           stateMap.chatSocket = io.connect(socketUrl, socketObj);
+           stateMap.chatSocket.on('connect', connectHandler);
+           stateMap.chatSocket.on('disconnect', disconnectHandler);
+           stateMap.chatSocket.on('message', messageHandler);
 
-        //如果socket没有连线 则进行连线
-        if (!stateMap.chatSocket.connected) {
-            stateMap.chatSocket.open();
-        }
-        //是不是为第一次连线
-        if (stateMap.isFirst) {
-            disconnectHandler();
-            stateMap.isFirst = false;
-        }
+           //如果socket没有连线 则进行连线
+           if (!stateMap.chatSocket.connected) {
+               stateMap.chatSocket.open();
+           }
+           //是不是为第一次连线
+           if (stateMap.isFirst) {
+               disconnectHandler();
+               stateMap.isFirst = false;
+           }
 
-    };*/
+       };*/
 
-  /*  connectHandler = function () {
-        clearInterval(stateMap.socketIntervalId);
-    };*/
+    /*  connectHandler = function () {
+          clearInterval(stateMap.socketIntervalId);
+      };*/
 
 
     /*disconnectHandler = function () {
@@ -77,43 +77,45 @@ var indexJs = (function () {
 
     };*/
 
-   /* messageHandler = function (data) {
-        console.log("Message received  = " + data);
-        switch (data.cmd) {
-            case 'ForceKickOut': {
-                clearInterval(stateMap.socketIntervalId);
-                console.log("強制登出");
-                if (data.jsonResult.userId == stateMap.userInfo.id) {
-                    alert('侦测到账号已由其他地方进行登入，请重新登入');
-                }
-                document.location = "doLogout";
-                break;
-            }
-            case 'test': {
+    /* messageHandler = function (data) {
+         console.log("Message received  = " + data);
+         switch (data.cmd) {
+             case 'ForceKickOut': {
+                 clearInterval(stateMap.socketIntervalId);
+                 console.log("強制登出");
+                 if (data.jsonResult.userId == stateMap.userInfo.id) {
+                     alert('侦测到账号已由其他地方进行登入，请重新登入');
+                 }
+                 document.location = "doLogout";
+                 break;
+             }
+             case 'test': {
 
-                break;
-            }
-            case 'NEW_TRANSACTION_RECORD': {
-                clearInterval(stateMap.socketIntervalId);
-                console.log("新的交易纪录");
-                if (data.jsonResult.userId == stateMap.userInfo.id) {
-                    let option = noticeBar.getOption
-                    option.title = "通知";
-                    option.message = "您有一笔新的订单，请注意查收";
-                    option.longDoesIt = 5000;
-                    noticeBar.createSuccessfulBar(option);
-                }
-            }
-            default: {
-                break;
-            }
-        }
+                 break;
+             }
+             case 'NEW_TRANSACTION_RECORD': {
+                 clearInterval(stateMap.socketIntervalId);
+                 console.log("新的交易纪录");
+                 if (data.jsonResult.userId == stateMap.userInfo.id) {
+                     let option = noticeBar.getOption
+                     option.title = "通知";
+                     option.message = "您有一笔新的订单，请注意查收";
+                     option.longDoesIt = 5000;
+                     noticeBar.createSuccessfulBar(option);
+                 }
+             }
+             default: {
+                 break;
+             }
+         }
 
-    };*/
+     };*/
 
     init = function () {
         console.log("index loading ");
         stateMap.userInfo = window.user;
+
+        $("#doLogOut").text(window.user.account);
     };
     return {
         init: init,
