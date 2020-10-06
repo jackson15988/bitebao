@@ -11,6 +11,9 @@
     <script th:src="@{/static/js/common/ajaxError.js}"></script>
     <script th:src="@{/static/js/common/ajaxSetup.js}"></script>
 
+    <script th:src="@{/static/js/vendors.bundle.js}"></script>
+    <script th:src="@{/static/js/app.bundle.js}"></script>
+
     <!--賦予USER資訊給予index.js-->
     <script th:inline="javascript">window.user = [[${session.userSession}]];</script>
 
