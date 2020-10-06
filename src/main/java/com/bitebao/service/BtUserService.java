@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -31,9 +32,11 @@ public class BtUserService {
     }
 
     public BtUser updateUserInfo(HttpServletRequest request, BtUser user) {
-
-
         return btuserRepository.save(user);
+    }
+
+    public List<BtUser> findAllMember() {
+        return btuserRepository.findAll();
     }
 
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,6 +53,21 @@ public class UserController {
         return ResponseUtil.successOutputResult("success");
     }
 
+
+    /**
+     * 找尋所有的客戶進行管理機制
+     *
+     * @param user
+     * @param result
+     * @param model
+     * @param request
+     * @return
+     */
+    @GetMapping("/findAllMember")
+    public ResponseEntity<SuccessResponseDto> findAllMember(BtUser user, BindingResult result, Model model, HttpServletRequest request) {
+        System.out.print("取得user資訊:" + user);
+        return ResponseUtil.successOutputResult(btUserService.findAllMember(), "success");
+    }
     /*
 
      */
