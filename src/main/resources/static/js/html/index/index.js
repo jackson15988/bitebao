@@ -14,7 +14,6 @@ var indexJs = (function () {
         userInfo: null
     }, init, initWsConnection, connectHandler, disconnectHandler, messageHandler;
 
-
  /*   initWsConnection = function () {
         console.log('初始化执行');
         let socketObj = {
@@ -113,7 +112,7 @@ var indexJs = (function () {
     };*/
 
     init = function () {
-        console.log('家仔');
+        console.log("index loading ");
         stateMap.userInfo = window.user;
     };
     return {

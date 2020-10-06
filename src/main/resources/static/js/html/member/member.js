@@ -5,15 +5,18 @@ var member = (function () {
         }, init, initMemberInfo,
         //初始化統一命名init
         init = function () {
+        console.log('執行');
             initMemberInfo();
         };
 
     initMemberInfo = function () {
+        let userData = indexJs.getUserInfo();
         let memberData = {
-            account: 'qoooqoo884'
+            account: userData.account,
         };
-        $.get("/rest/mvVideo/findGridVideoList", memberData, function (response) {
+        $.get("/bitebao/admin/user/findUserInfoByAccount", memberData, function (response) {
             let memberInfo = response.result;
+            $("#account").val(memberInfo.account);
             console.log('回傳資訊' + memberInfo);
         });
 

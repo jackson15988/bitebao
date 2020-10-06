@@ -1,25 +1,18 @@
 package com.bitebao.controller;
 
-import com.bitebao.bo.UserBo;
 import com.bitebao.dto.SuccessResponseDto;
 import com.bitebao.entity.BtUser;
 import com.bitebao.service.BtUserService;
-import com.bitebao.utils.HostAddressUtils;
 import com.bitebao.utils.LogUtils;
-import com.bitebao.utils.MD5Utils;
 import com.bitebao.utils.ResponseUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
