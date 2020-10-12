@@ -14,11 +14,6 @@ public class BtUser extends BaseEntity {
     @Column(name = "ACCOUNT")
     private String account;
 
-    @Column(name = "PHONE_NUMBER")
-    private String phoneNumber;
-
-    @Column(name = "AUTHENTICATION")
-    private String authentication;
 
     @Column(name = "NIKE_NAME")
     private String nikeName;
@@ -40,5 +35,8 @@ public class BtUser extends BaseEntity {
 
     @Column(name = "EMAIL")
     private String email;
+
+    @OneToOne(mappedBy = "btUser", cascade = CascadeType.ALL)
+    private BtRobot btRobot;
 
 }

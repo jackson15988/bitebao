@@ -36,9 +36,11 @@ public class UserController {
 
 
     @PostMapping("/editMember")
-    public ResponseEntity<SuccessResponseDto> editMember(BtUser user, BindingResult result, Model model, HttpServletRequest request) {
+    public ResponseEntity<SuccessResponseDto> editMember(@RequestBody  BtUser user) {
         try {
-            btUserService.updateUserInfo(request, user);
+            System.out.print(user);
+           /* btUserService.updateUserInfo(request, user);
+           * */
         } catch (Exception e) {
 
         }
